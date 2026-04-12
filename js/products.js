@@ -54,7 +54,7 @@ function updateFilterCount() {
         countEle.style.display = count > 0 ? 'flex' : 'none';
     }
     if (applyBtn) {
-        applyBtn.disabled = count === 0;
+        applyBtn.disabled = false;
     }
 }
 
@@ -64,18 +64,20 @@ function applyFilters() {
     let results = [...products];
 
     // Category filters
-    const selectedCategoies= Array.from(document.querySelectorAll('input[data-filter="Category"]:checked')).map(cb => cb.dataset.value);
+    const selectedCategories= Array.from(document.querySelectorAll('input[data-filter="Category"]:checked')).map(cb => cb.dataset.value);
 
-    if(selectedCategoies.length > 0) {
-        results = results.filter(product => selectedCategoies.includes(product.category));
+    if(selectedCategories.length > 0) {
+        results = results.filter(product => selectedCategories.includes(product.category));
     }
 
     // Price range filters
     const minPrice = parseInt(document.getElementById('minPrice').value) || 0;
     const maxPrice = parseInt(document.getElementById('maxPrice').value) || Infinity;    
     results = results.filter(product => product.price >= minPrice && product.price <= maxPrice);
+    
+    // Results output
     filteredProducts = results;
-    renderProducts(results);   
+    renderProducts(results);
 }
 
 

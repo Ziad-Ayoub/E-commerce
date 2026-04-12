@@ -155,7 +155,7 @@ body {
     box-shadow: var(--shadow-lg);
 }
 
-.apply-filters-btn:hover:not(:disabled) {
+.apply-filters-btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-sm);
     background-color: #f0c63d;
