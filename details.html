@@ -1,23 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium E-Commerce Boilerplate</title>
-
+    <title>Product Details - MyStore</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <link rel="stylesheet" href="CSS/global.css">
-
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="details.css">
 </head>
-
 <body>
 
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">My<span>Store</span></a>
-
             <ul class="nav-links">
                 <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
                 <li><a href="products.html"><i class="fa-solid fa-bag-shopping"></i> Products</a></li>
@@ -27,19 +22,81 @@
         </div>
     </nav>
 
-    <main class="container" style="min-height: 70vh; padding: 40px 0;">
+    <main class="container">
+        <div class="product-container">
+            <div class="product-images">
+                <div class="main-image">
+                    <img id="current-img" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000" alt="Main Product">
+                </div>
+                <div class="image-select">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=200" class="thumb active">
+                    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=200" class="thumb">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=200" class="thumb">
+                </div>
+            </div>
 
-        <div style="text-align: center; margin-top: 80px;">
-            <h1
-                style="font-family: 'Playfair Display', serif; color: var(--primary-dark); font-size: 3rem; margin-bottom: 20px;">
-                Welcome to MyStore
-            </h1>
-            <p style="font-size: 1.2rem; margin-bottom: 30px;">
-                This is the boilerplate area. Start building your page right here!
-            </p>
-            <button class="btn-gold">Start Coding Now</button>
+            <div class="product-content">
+                <h1 class="product-title">Premium Gold Collection</h1>
+                <div class="product-price">$299.00</div>
+                <div class="rating-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                    <span>(4.8/5 Customer Rating)</span>
+                </div>
+                <p class="product-description">
+                    Experience luxury with our exclusive collection. This product is crafted with precision to ensure quality, durability, and a style that perfectly aligns with the MyStore brand identity.
+                </p>
+                
+                <div class="product-actions">
+                    <button class="btn-gold"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
+                    <button class="wishlist-btn" id="wishlist-trigger">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <section class="reviews-section">
+    <div class="reviews-grid">
+        
+        <div class="add-review-card">
+            <h3><i class="fa-solid fa-pen-fancy"></i> Write Your Review</h3>
+            <form id="review-form">
+                <div class="form-group">
+                    <label>Your Rating: </label>
+                    <select id="user-rating" class="gold-select" required>
+                        <option value="5">★★★★★ (5 Stars)</option>
+                        <option value="4">★★★★☆ (4 Stars)</option>
+                        <option value="3">★★★☆☆ (3 Stars)</option>
+                        <option value="2">★★☆☆☆ (2 Stars)</option>
+                        <option value="1">★☆☆☆☆ (1 Star)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Comment: </label>
+                    <textarea id="user-comment" placeholder="Write your thoughts about the product... How was the quality? the design?" required></textarea>
+                </div>
+                <button type="submit" class="btn-gold">Submit Review</button>
+            </form>
         </div>
 
+        <div class="reviews-display">
+            <h2 class="section-title">Customer Reviews</h2>
+            <div id="reviews-list">
+                
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="review-user"><i class="fa-solid fa-user-circle"></i> Ahmed Mohamed</span>
+                        <div class="stars-row">
+                            <i class="fa-solid fa-star gold"></i><i class="fa-solid fa-star gold"></i><i class="fa-solid fa-star gold"></i><i class="fa-solid fa-star gold"></i><i class="fa-solid fa-star gold"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">Excellent quality! Exceeded my expectations. The design is really sophisticated and aligns perfectly with the brand's luxury identity. Highly recommended.</p>
+                </div>
+
+                </div>
+        </div>
+        
+    </div>
+</section>
     </main>
 
     <footer class="footer">
@@ -48,6 +105,6 @@
         </div>
     </footer>
 
+    <script src="details.js"></script>
 </body>
-
 </html>

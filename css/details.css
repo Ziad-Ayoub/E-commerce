@@ -1,0 +1,182 @@
+/* Layout Alignment */
+.product-container {
+    display: flex;
+    gap: 60px;
+    margin-top: 50px;
+    align-items: flex-start;
+}
+
+/* Image Gallery Styling */
+.product-images {
+    flex: 1.2;
+}
+
+.main-image img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid #eee;
+    transition: opacity 0.3s ease;
+}
+
+.image-select {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.thumb {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: var(--transition);
+}
+
+.thumb:hover, .thumb.active {
+    border-color: var(--accent-gold);
+    transform: translateY(-3px);
+}
+
+/* Product Info Styling */
+.product-content {
+    flex: 1;
+}
+
+.product-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 2rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.rating-stars {
+    color: #f1c40f;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.rating-stars span {
+    color: var(--text-main);
+    margin-left: 10px;
+}
+
+.product-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-main);
+    margin-bottom: 35px;
+}
+
+/* Action Buttons */
+.product-actions {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.wishlist-btn {
+    background: white;
+    border: 2px solid var(--accent-gold);
+    color: var(--accent-gold);
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.wishlist-btn:hover {
+    background: var(--accent-gold);
+    color: white;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Responsive for Tablets & Phones */
+@media (max-width: 992px) {
+    .product-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+}
+
+/* --- Reviews Section Layout --- */
+.reviews-section {
+    margin-top: 60px;
+    padding: 40px 0;
+    border-top: 1px solid #eee;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Side-by-side layout */
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* --- Modern Review Form Card --- */
+.add-review-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm); /* Using your global variables */
+    border: 1px solid #f1f5f9;
+}
+
+/* --- Transparent Modern Full-Width Textbox --- */
+.add-review-card textarea {
+    width: 100%; /* Makes it take the full width */
+    min-height: 120px;
+    padding: 20px;
+    
+    /* Transparency & Glass Effect */
+    background: rgba(255, 255, 255, 0.4); /* White with 40% transparency */
+    backdrop-filter: blur(10px); /* Blurs the background behind it */
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    
+    /* Modern Border & Shadow */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Soft white border */
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05); /* Very soft shadow */
+    
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--primary-dark);
+    outline: none;
+    resize: none; /* Keeps the look consistent */
+    transition: all 0.3s ease;
+    margin: 20px 0;
+}
+
+/* Interaction: Focus State */
+.add-review-card textarea:focus {
+    background: rgba(255, 255, 255, 0.6); /* Slightly more opaque when typing */
+    border-color: var(--accent-gold);
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.1);
+}
+
+/* English Placeholder Styling */
+.add-review-card textarea::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+    font-style: italic;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+    .reviews-grid {
+        grid-template-columns: 1fr; /* Stack on mobile */
+    }
+}

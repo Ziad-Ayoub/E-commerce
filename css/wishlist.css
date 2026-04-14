@@ -1,0 +1,28 @@
+.product-wrapper {
+    display: flex;
+    gap: 40px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+}
+.product-gallery, .product-details {
+    flex: 1;
+    min-width: 300px;
+}
+.product-gallery img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: var(--shadow-lg);
+}
+.wish-btn {
+    background: white;
+    border: 2px solid var(--accent-gold);
+    color: var(--accent-gold);
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.wish-btn.active {
+    background: var(--accent-gold);
+    color: white;
+}
