@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard – MyStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">My<span>Store</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="products.html"><i class="fa-solid fa-bag-shopping"></i> Products</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a></li>
+                <li><a href="wishlist.html"><i class="fa-solid fa-star"></i> Wishlist</a></li>
+                <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                <li><a href="admin.html" class="active-nav"><i class="fa-solid fa-gauge"></i> Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container admin-main">
+
+        <!-- Page Header -->
+        <div class="admin-header">
+            <div>
+                <h1 class="admin-title">Admin Dashboard</h1>
+                <p class="admin-subtitle">Manage products and process orders</p>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon stat-icon--gold"><i class="fa-solid fa-box"></i></div>
+                <div class="stat-info">
+                    <span class="stat-label">Total Products</span>
+                    <span class="stat-value" id="stat-products">0</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon stat-icon--blue"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="stat-info">
+                    <span class="stat-label">Orders in Queue</span>
+                    <span class="stat-value" id="stat-queue">0</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon stat-icon--green"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="stat-info">
+                    <span class="stat-label">Processed Orders</span>
+                    <span class="stat-value" id="stat-processed">0</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon stat-icon--red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <div class="stat-info">
+                    <span class="stat-label">Low Stock Items</span>
+                    <span class="stat-value" id="stat-lowstock">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="admin-grid">
+
+            <!-- LEFT: Product Management -->
+            <section class="admin-card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fa-solid fa-cubes"></i> Product Management</h2>
+                </div>
+
+                <form id="product-form" class="product-form" onsubmit="addProduct(event)">
+                    <h3 class="form-title">Add New Product</h3>
+                    <div class="form-group">
+                        <label for="prod-name">Product Name</label>
+                        <input type="text" id="prod-name" placeholder="e.g. Wireless Headphones" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="prod-price">Price ($)</label>
+                            <input type="number" id="prod-price" placeholder="0.00" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prod-stock">Stock</label>
+                            <input type="number" id="prod-stock" placeholder="0" min="0" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="prod-category">Category</label>
+                        <select id="prod-category" required>
+                            <option value="">Select category…</option>
+                            <option>Electronics</option>
+                            <option>Clothing</option>
+                            <option>Home & Living</option>
+                            <option>Sports</option>
+                            <option>Books</option>
+                            <option>Beauty</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="prod-description">Product Description</label>
+                        <textarea id="prod-description" rows="3" placeholder="Enter product details..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Product Image</label>
+                        <div class="file-upload-wrapper">
+                            <label for="prod-image" class="file-upload-label">
+                                <i class="fa-solid fa-upload"></i>
+                                <span id="file-upload-text">Click to choose an image from your PC</span>
+                            </label>
+                            <input type="file" id="prod-image" accept="image/*" onchange="previewImage(event)" multiple>
+                        </div>
+                        <div id="image-preview-container" class="preview-grid" style="display:none; margin-top:8px;"></div>
+                        <button type="button" id="clear-preview-btn" class="btn-text" style="display:none; margin-top:4px; color:#ef4444;" onclick="clearImagePreview()">
+                            <i class="fa-solid fa-xmark"></i> Remove images
+                        </button>
+                    </div>
+                    <button type="submit" class="btn-gold" style="width:100%;">
+                        <i class="fa-solid fa-plus"></i> Add Product
+                    </button>
+                </form>
+
+                <div class="divider"></div>
+
+                <div class="product-list-header">
+                    <h3 class="form-title">Current Products</h3>
+                    <input type="text" id="search-products" placeholder="Search products…" class="search-input" oninput="renderProducts()">
+                </div>
+                <div id="product-list" class="product-list"></div>
+            </section>
+
+            <!-- RIGHT: Order Queue (FIFO) -->
+            <section class="admin-card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fa-solid fa-list-ol"></i> Order Queue</h2>
+                </div>
+
+                <div class="queue-controls">
+                    <button class="btn-gold" onclick="processNextOrder()">
+                        <i class="fa-solid fa-forward"></i> Process Next
+                    </button>
+                </div>
+
+                <div class="fifo-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Orders are processed <strong>First In, First Out</strong> — the oldest order is always next.</span>
+                </div>
+
+                <div id="order-queue" class="order-queue"></div>
+
+                <div class="divider"></div>
+
+                <div class="card-header" style="margin-top:0;">
+                    <h3 class="card-title" style="font-size:1rem;"><i class="fa-solid fa-check-double"></i> Processed Orders Log</h3>
+                    <button class="btn-text" onclick="clearProcessedLog()">Clear Log</button>
+                </div>
+                <div id="processed-log" class="processed-log">
+                    <p class="empty-msg">No orders processed yet.</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 E-Commerce Team Project.</p>
+        </div>
+    </footer>
+
+    <!-- api.js  -->
+    <script src="js/api.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/global.js"></script>
+</body>
+</html>

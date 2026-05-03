@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium E-Commerce Boilerplate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/products.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">My<span>Store</span></a>
+
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="products.html"><i class="fa-solid fa-bag-shopping"></i> Products</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> Cart</a></li>
+                <li><a href="wishlist.html"><i class="fa-solid fa-star"></i> Wishlist</a></li>
+                <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+               <li id="admin-nav-item" style="display: none;">
+                    <a href="admin.html" class="nav-item admin-link"><i class="fa-solid fa-gauge"></i> Admin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <!--category side filter-->
+        <aside class="filters">
+            <div class="filter-group">
+                <h3 class="filter-title">
+                    <span>Category</span>
+                </h3>
+                <ul class="filter-options">
+                    <li class="filter-option">
+                        <input type="checkbox" id="accessories" data-filter="Category" data-value="Accessories">
+                        <label for="accessories">Accessories</label>
+                    </li>
+                    <li class="filter-option">
+                        <input type="checkbox" id="clothing" data-filter="Category" data-value="Clothing">
+                        <label for="clothing">Clothing</label>
+                    </li>
+                    <li class="filter-option">
+                        <input type="checkbox" id="shoes" data-filter="Category" data-value="Shoes">
+                        <label for="shoes">Shoes</label>
+                    </li>
+                    <li class="filter-option">
+                        <input type="checkbox" id="glasses" data-filter="Category" data-value="Glasses">
+                        <label for="glasses">Glasses</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="filter-group">
+                <h3 class="filter-title">Pricing</h3>
+                <div class="price-range">
+                    <div class="price-inputs">
+                        <div class="price-input">
+                            <label>Min</label>
+                            <input type="number" id="minPrice" placeholder="0$" min="0">
+                        </div>
+                        <div class="price-input">
+                            <label>Max</label>
+                            <input type="number" id="maxPrice" placeholder="1000$" max="1000000">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button class="apply-filters-btn" id="applyFilters">
+                    <i class="fa-solid fa-filter"></i>
+                    <span>Apply Filters</span>
+                    <span class="filter-count" id="filterCount">0</span>
+                </button>
+                <button class="clear-filters" id="clearFilters">
+                    <i class="fa-solid fa-times-circle"></i>
+                    Clear All Filters
+                </button>
+            </div>
+        </aside>
+        
+        <!--main content-->
+        <main class="main-content">
+            <!--Search Bar & button-->
+            <section class="search-section">
+                <div class="search-bar">
+                    <button type="button" class="search-button" id="searchButton" aria-label="Search">
+                        <div class="search-icon">
+                            <i class="fa-solid fa-search"></i>
+                        </div>
+                    </button>
+                    <input type="text" placeholder="Search products..." id="searchInput">
+                </div>
+            </section>
+
+            <!--Products-->
+            
+            <div class="products-grid" id="productsGrid"></div>
+
+            <div class="results-info">
+
+                <div class="results-text">
+                    showing <span id="resultCount"> 0 </span> of <span id="totalProducts">156</span> products
+                </div>
+
+                <div class="pagination-container" id="pagination"></div>
+            </div>
+        </main>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 E-Commerce Team Project. </p>
+        </div>
+    </footer>
+    
+    <script src="js/api.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/global.js"></script>
+</body>
+
+</html>

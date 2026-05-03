@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/global.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Shopping Cart</title>
+
+    <link rel="stylesheet" href="css/cart.css">
+
+    <title>Premium E-Commerce Boilerplate</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">My<span>Store</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="products.html"><i class="fas fa-shopping-bag"></i> Products</a></li>
+                <li><a href="cart.html" class="active"><i class="fas fa-shopping-cart cart-icon-black"></i>
+                    <span class ="cart-text-black">Cart</span></a>
+                </li>
+                <li><a href="wishlist.html"><i class="fa-solid fa-star"></i> Wishlist</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li id="admin-nav-item" style="display: none;">
+                    <a href="admin.html" class="nav-item admin-link"><i class="fa-solid fa-gauge"></i> Admin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main class="container" style="min-height: 70vh; padding: 40px 0;">
+        <div style="text-align: center; margin-top: 80px;">
+
+            <div class="container">
+                <h2>Shopping Cart</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-table-body">
+                    </tbody>
+                </table>
+
+                <div class="total-section">
+                    Total: <span id="total-price">0</span> EGP
+                </div>
+
+                <div class="cart-summary">
+                    <button id="checkout-btn" class="btn-gold" onclick="checkout()" style="width: 100%; margin-bottom: 10px; font-size: 1.1rem;">
+                        <i class="fa-solid fa-credit-card"></i> Proceed to Checkout
+                    </button>
+                    
+                    <button id="undo-btn" class="undo-btn" onclick="undoDelete()" style="display:none;">
+                        Undo Last Delete
+                    </button>
+                </div>
+            </div>
+            </div>
+    </main>
+
+    
+    <script src="js/api.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/global.js"></script>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 My Store Team Project. </p>
+        </div>
+    </footer>
+</body>
+</html>         
