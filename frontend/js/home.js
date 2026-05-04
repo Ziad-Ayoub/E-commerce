@@ -15,7 +15,7 @@ try {
             productCard.innerHTML = `
                 <img src="http://localhost:5000/uploads/${product.images[0]}" alt="${product.title}" class="product-img">
                 <h3 class="product-title">${product.title}</h3>
-                <p class="product-price">${product.price}</p>
+                <p class="product-price">$${product.price}</p>
                 <a href="details.html?id=${product._id}" class="btn-details">View Details</a>
                 <button class="btn-cart add-to-cart" data-id="${product._id}">Add to Cart</button>
             `;
