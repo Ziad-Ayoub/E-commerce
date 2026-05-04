@@ -75,7 +75,7 @@ function getProducts() {
    ADD PRODUCT
 ──────────────────────────────────────────── */
 /* Holds the base64 string of the chosen image */
-let selectedImageBase64 = "";
+
 
 function previewImage(event) {
     const files          = event.target.files;

@@ -95,7 +95,7 @@ exports.processOrder = async (req, res) => {
 };
 
 
-//not yet implemented fully
+
 //get all products for admin
 exports.getAllProducts = async (req, res) => {
     try {
