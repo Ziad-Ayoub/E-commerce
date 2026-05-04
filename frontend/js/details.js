@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     } catch (error) {
         console.error('Error fetching product details:', error);
-        alert('Failed to load product details. Please try again later.');
+        showToast('Failed to load product details. Please try again later.');
     }
 });
 
@@ -185,14 +185,14 @@ reviewForm.addEventListener('submit', async function(e) {
             body: JSON.stringify({ productId, rating, comment })
         });
         if (response.ok) {
-            alert('Review submitted successfully!');
+            showToast('Review submitted successfully!');
             window.location.reload(); // Reload to show new review
         } else {
-            alert('Failed to submit review. Please log in and try again.');
+            showToast('Failed to submit review. Please log in and try again.');
         }
     } catch (error) {
         console.error('Error submitting review:', error);
-        alert('An error occurred while submitting your review. Please try again later.');
+        showToast('An error occurred while submitting your review. Please try again later.');
     }
 
 });

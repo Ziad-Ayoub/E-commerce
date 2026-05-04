@@ -63,14 +63,14 @@ async function addToCart(productId) {
             body: JSON.stringify({ productId })
         });
         if (response.ok) {
-            alert('Product added to cart!');
+            showToast('Product added to cart!');
         } else {
             const errData = await response.json();
-            alert(`Failed to add to cart: ${errData.message}`);
+            showToast(`Failed to add to cart: ${errData.message}`);
         }
     } catch (error) {
         console.error('Error adding to cart:', error);
-        alert('An error occurred. Please try again.');
+        showToast('An error occurred. Please try again.');
     }
 }
 
@@ -86,10 +86,11 @@ async function removeFromWishlist(productId) {
             if (window.userWishlistIds) {
                 window.userWishlistIds = window.userWishlistIds.filter(id => id !== productId);
             }
+            showToast('Product removed from your WishList');
             // Re-render the page to instantly remove the card from the screen
             renderWishlist(); 
         } else {
-            alert('Failed to remove from wishlist.');
+            showToast('Failed to remove from wishlist.');
         }
     } catch (error) {
         console.error('Error removing from wishlist:', error);

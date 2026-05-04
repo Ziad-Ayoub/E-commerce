@@ -208,7 +208,7 @@ function renderProducts() {
 
     if (searchVal) {
         products = products.filter(p =>
-            p.name.toLowerCase().includes(searchVal) ||
+            p.title.toLowerCase().includes(searchVal) ||
             p.category.toLowerCase().includes(searchVal)
         );
     }
@@ -361,20 +361,9 @@ function updateStats() {
 }
 
 /* ────────────────────────────────────────────
-   TOAST NOTIFICATION
+   TOAST NOTIFICATION - cut and put into global. to be a shared function.
 ──────────────────────────────────────────── */
-function showToast(message, type = "success") {
-    const existing = document.querySelector(".toast");
-    if (existing) existing.remove();
 
-    const icons = { success: "fa-circle-check", error: "fa-circle-xmark", warn: "fa-triangle-exclamation" };
-    const toast = document.createElement("div");
-    toast.className = "toast";
-    toast.innerHTML = `<i class="fa-solid ${icons[type] || icons.success}" style="margin-right:8px;"></i>${message}`;
-
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
-}
 
 /* ────────────────────────────────────────────
    INIT

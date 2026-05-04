@@ -58,8 +58,9 @@ exports.updateProfile = async (req, res) => {
         if (req.body.name) user.name = req.body.name;
         if (req.body.email) user.email = req.body.email;
         if (req.body.password) {
-            const salt = await bcrypt.genSalt(10);
-            user.password = await bcrypt.hash(req.body.password, salt);
+
+            //just assign raw text, and userSchema.pre('save') hook will automatically hash it
+            user.password = req.body.password;
         }
         await user.save();
         res.json({ message: 'Profile updated successfully' });
@@ -81,14 +82,17 @@ exports.getCart = async (req, res) => {
 
 exports.addToCart = async (req, res) => {
     try {
-        const {productId} = req.body;
+        const {productId, quantity} = req.body;
         const user = await User.findById(req.user._id);
-
         const itemIndex = user.cart.findIndex(item => item.product.toString() === productId);
+
+        // if qty is provided, use it. otherwise, default is 1.
+        const qtyToAdd = quantity ? Number(quantity) : 1;
+        
         if (itemIndex > -1) {
             user.cart[itemIndex].quantity += 1; // Increment quantity if product already in cart
         } else {
-            user.cart.push({ product: productId, quantity: 1 }); // Add new product to cart
+            user.cart.push({ product: productId, quantity: qtyToAdd }); // Add new product to cart
         }
         await user.save();
         res.status(201).json(user.cart);

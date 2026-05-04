@@ -66,10 +66,14 @@ async function undoDelete() {
         const response = await fetch(`${API_URL}/cart`, {
             method: 'POST',
             headers: getAuthHeaders(),
-            body: JSON.stringify({ productId: lastItem.product._id })
+            body: JSON.stringify({ 
+                productId: lastItem.product._id, 
+                quantity: lastItem.quantity  //return the exact qty that was saved
+            })
         });
         if (response.ok) {
             renderCart();
+            showToast('Item restored to cart');
         }else {
             console.error('Failed to restore item');
             deletedItemsStack.push(lastItem); // Push it back if restore failed
@@ -83,13 +87,13 @@ async function checkout() {
     // 1. Guardrail: Prevent guest checkout crash
     const userStr = localStorage.getItem('user');
     if (!userStr) {
-        alert("Please log in or register to checkout.");
+        showToast("Please log in or register to checkout.");
         window.location.href = "profile.html";
         return;
     }
 
     if (!cartData || cartData.length === 0) {
-        alert("Your cart is empty!");
+        showToast("Your cart is empty!");
         return;
     }
 
@@ -101,16 +105,16 @@ async function checkout() {
         });
 
         if (response.ok) {
-            alert('Order placed successfully! Thank you for your purchase.');
+            showToast('Order placed successfully! Thank you for your purchase.');
             // 3. The backend already emptied the cart, just re-render the UI
             renderCart();
         } else {
             const errData = await response.json();
-            alert(`Checkout failed: ${errData.message}`);
+            showToast(`Checkout failed: ${errData.message}`);
         }
     } catch (error) {
         console.error('Error during checkout:', error);
-        alert('An error occurred during checkout. Please try again.');
+        showToast('An error occurred during checkout. Please try again.');
     }
 }
 

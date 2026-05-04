@@ -145,7 +145,7 @@ async function applyFilters() {
         renderProducts(results);
     } catch (error) {
         console.error('Error applying filters:', error);
-        alert('Failed to apply filters. Please try again later.');
+        showToast('Failed to apply filters. Please try again later.');
     } 
 }
 
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('clearFilters')?.addEventListener('click', clearFilters);
     } catch (error) {
         console.error('Error fetching products:', error);
-        alert('Failed to load products. Please try again later.');
+        showToast('Failed to load products. Please try again later.');
     }
 });
 

@@ -36,8 +36,23 @@ exports.createOrder = async (req, res) => {
         const itemString = itemNames.join(', ');
         const timestamp = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
 
+        //custom order ID generation
+        const lastOrder = await Order.findOne().sort({ createdAt: -1 });
+        let nextIdNumber = 1000; // The starting number if no orders exist
+
+        // If a previous order exists and has our custom format, extract the number and add 1
+        if (lastOrder && lastOrder._id && typeof lastOrder._id === 'string' && lastOrder._id.startsWith('ORD-')) {
+            const lastNumber = parseInt(lastOrder._id.split('-')[1]);
+            if (!isNaN(lastNumber)) {
+                nextIdNumber = lastNumber + 1;
+            }
+        }
+        
+        const customOrderId = `ORD-${nextIdNumber}`;
+        
         //Create the secure order
         const order = await Order.create({
+            _id: customOrderId,
             customer: user.name,
             qty: totalQty,
             item: itemString,

@@ -19,7 +19,7 @@ async function register() {
     const password = get("registerPassword").value.trim();
 
     if (!name || !email || !password) {
-        alert("Please fill in all fields!");
+        showToast("Please fill in all fields!");
         return;
     }
 
@@ -31,11 +31,11 @@ async function register() {
         });
 
         if (res.ok) {
-            alert("Registered successfully!");
+            showToast("Registered successfully!");
             showLogin();
         } else {
             const data = await res.json();
-            alert(data.message || "Failed to register. Please try again later.");
+            showToast(data.message || "Failed to register. Please try again later.");
         }
     } catch (error) {console.error('error');}
 }
@@ -72,7 +72,7 @@ async function login() {
                 }
             }
         } else {
-            alert("Wrong email or password!");
+            showToast("Wrong email or password!");
         }
     } catch (error) {
         console.error('Error:', error);
@@ -96,7 +96,7 @@ async function saveEdit() {
     const newValue = get("editInput").value.trim();
 
     if (!newValue) {
-        alert("Field cannot be empty!");
+        showToast("Field cannot be empty!");
         return;
     }
 
@@ -109,7 +109,7 @@ async function saveEdit() {
 
     if (editType === "email") {
         if (!newValue.includes("@")) {
-            alert("Please enter a valid email.");
+            showToast("Please enter a valid email.");
             return;
         }
         updatePayload = { email: newValue };
@@ -137,13 +137,13 @@ async function saveEdit() {
             }
             if (editType === "password") {
                 get("profilePassword").innerText = "••••••••";
-                alert("Password updated successfully!");
+                showToast("Password updated successfully!");
             }
             //hide the edit box after successful update
             get("editBox").style.display = "none";
             get("editInput").value = "";
         } else {
-            alert("Failed to update profile. Please try again later.");
+            showToast("Failed to update profile. Please try again later.");
         }
     } catch (error) {
         console.error('Error updating profile:', error);
@@ -154,7 +154,7 @@ function logout() {
     localStorage.removeItem('authToken');// Clear auth token from localStorage
     localStorage.removeItem('user');// Clear user data from localStorage
     
-    alert("Logged out successfully!");
+    showToast("Logged out successfully!");
     window.location.reload();
 }
 

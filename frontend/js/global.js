@@ -75,14 +75,14 @@ document.addEventListener('click', async (e) => {
                 body: JSON.stringify({ productId })
             });
             if (response.ok) {
-                alert('Product added to cart!');
+                showToast('Product added to cart!');
             } else {
                 const errData = await response.json();
-                alert(`Backend Error: ${errData.message}`);
+                showToast(`Backend Error: ${errData.message}`);
             }
         } catch (error) {
             console.error('Error adding to cart:', error);
-            alert('Failed to add product to cart. Please try again later.');
+            showToast('Failed to add product to cart. Please try again later.');
         }
     }
 
@@ -114,17 +114,20 @@ document.addEventListener('click', async (e) => {
                 if (window.userWishlistIds !== null){
                     if (isAdding) {
                         window.userWishlistIds.push(productId)
+                        showToast(`Product added to your WishList`);
                     } else {
                         window.userWishlistIds = window.userWishlistIds.filter(id => id !== productId)
+                        showToast(`Product removed from your WishList`);
                     }
                 }
+                
             } else{
                 const errData = await response.json();
-                alert(`Backend Error: ${errData.message}`);
+                showToast(`Backend Error: ${errData.message}`);
             }
         } catch (error) {
             console.error('Error updating wishlist:', error);
-            alert('Failed to update wishlist. Please try again later.');
+            showToast('Failed to update wishlist. Please try again later.');
         }
     }
     
@@ -137,3 +140,19 @@ document.addEventListener('click', async (e) => {
         }
     }
 });
+
+/* ────────────────────────────────────────────
+   TOAST NOTIFICATION
+──────────────────────────────────────────── */
+function showToast(message, type = "success") {
+    const existing = document.querySelector(".toast");
+    if (existing) existing.remove();
+
+    const icons = { success: "fa-circle-check", error: "fa-circle-xmark", warn: "fa-triangle-exclamation" };
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerHTML = `<i class="fa-solid ${icons[type] || icons.success}" style="margin-right:8px;"></i>${message}`;
+
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+}
