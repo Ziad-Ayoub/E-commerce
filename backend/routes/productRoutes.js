@@ -11,11 +11,9 @@ const { createProduct } = require('../controllers/adminController');
 const { protect,admin } = require('../middlewares/authMiddleware');
 const upload = require('../middlewares/uploadMiddleware');
 
-// GET Routes
+
 router.get('/', getProducts);
 router.get('/:id', getProductById);
-
-// POST Route (Admin bypass enabled for testing: only requires 'protect')
 router.post('/', protect, admin, upload.array('images', 5), createProduct);
 
 module.exports = router;

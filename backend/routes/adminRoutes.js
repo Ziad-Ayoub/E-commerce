@@ -4,9 +4,7 @@ const { deleteProduct, getPendingOrders, processOrder, getProcessedOrders, clear
 const { protect, admin } = require('../middlewares/authMiddleware');
 
 //routes automatically prefixed with /api/admin by server.js
-// @route   DELETE /api/admin/products/:id
-// @desc    Delete a product
-// @access  Private/Admin
+
 router.delete('/products/:id', protect, admin, deleteProduct);
 router.get('/orders/pending', protect, admin, getPendingOrders);
 router.get('/orders/processed', protect, admin, getProcessedOrders);
